@@ -24,7 +24,7 @@ POST
 ```
     curl -X POST http://localhost:8080/movies \
     -H "Content-Type: application/json"
-    -d '{ISBN:"Some-isbn", Title: "Some-title", Director: {Firstname: "Some",Lastname: "Director"}}'
+    -d '{"isbn":"Some-isbn", "title": "Some-title", "director": {"firstname": "Some", "lastname": "Director"}}'
 ```
 
 DELETE
@@ -36,5 +36,5 @@ PUT
 ```
     curl -X PUT http://localhost:8080/movies/{id} \
     -H "Content-Type: application/json"
-    -d '{ISBN:"Some-isbn", Title: "Some-title", Director: {Firstname: "Some",Lastname: "Director"}}'
+    -d '{"isbn":"Some-isbn", "title": "Some-title", "director": {"firstname": "Some", "lastname": "Director"}}'
 ```
