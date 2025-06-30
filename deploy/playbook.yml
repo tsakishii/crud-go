@@ -1,0 +1,43 @@
+---
+- name: Run Go CRUD API locally as a POC
+  hosts: localhost
+  connection: local
+
+  vars:
+    app_dir: "{{ ansible_env.HOME }}/app-poc"
+
+  tasks:
+
+    - name: Check that Go is installed
+      command: go version
+      register: go_version
+      failed_when: go_version.rc != 0
+
+    - name: Ensure app directory exists
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy main.go
+      copy:
+        src: "{{ playbook_dir }}/../main.go"
+        dest: "{{ app_dir }}/main.go"
+        mode: '0644'
+
+    - name: Copy go.mod
+      copy:
+        src: "{{ playbook_dir }}/../go.mod"
+        dest: "{{ app_dir }}/go.mod"
+        mode: '0644'
+
+    - name: Copy go.sum
+      copy:
+        src: "{{ playbook_dir }}/../go.sum"
+        dest: "{{ app_dir }}/go.sum"
+        mode: '0644'
+
+    - name: Run 'go run .'
+      shell: go run .
+      args:
+        chdir: "{{ app_dir }}"
